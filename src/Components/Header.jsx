@@ -12,8 +12,8 @@ class Header extends React.Component  {
     render(){
         return (
             <>
-                <Navbar bg="light" variant="light">
-                    <Navbar.Brand href="#home">Blog Post </Navbar.Brand>
+                <Navbar bg="dark" variant="dark">
+                    <Navbar.Brand>Blog Post </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                     <Button variant="outline-warning" onClick={this.signOut} >Logout</Button>
