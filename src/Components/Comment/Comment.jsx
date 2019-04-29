@@ -28,10 +28,7 @@ class Comment extends React.Component {
         }
 
     }
-
-
     render() {
-        console.log(this.state)
         return (<>
             <h3 style={{ marginTop: '100px' }}>Comments</h3>
             <Card style={{ height: 'auto', width: '80%' }}>

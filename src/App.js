@@ -1,14 +1,13 @@
 import React from 'react';
 import './App.css';
 import { withAuthenticator } from 'aws-amplify-react';
-import Header from './Components/Header';
+import Header from './Components/Header/Header';
 import Blog from './Components/Blog/Blog';
 import {  Switch,Route } from 'react-router-dom';
-import Post from './Components/Blog/Post';
-import Detail from './Components/Blog/Detail';
+import Post from './Components/Post/Post';
+import Detail from './Components/Detail/Detail';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import Edit from './Components/Blog/Edit';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Edit from './Components/Edit/Edit';
 import { faPlusCircle,faHeart,faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
 library.add(faPlusCircle,faTrash,faHeart,faEdit)
 

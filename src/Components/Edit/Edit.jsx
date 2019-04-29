@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Button, Container } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import './Post.css'
+import '../Post/Post.css'
 class Edit extends React.Component {
     state = {
         title: this.props.location.state.detail.title,
@@ -16,7 +16,6 @@ class Edit extends React.Component {
             localStorage.setItem('UserData', JSON.stringify(data));
             this.props.history.push('/');
         }
-    
 
     changeHandler = (event) => {
         this.setState({

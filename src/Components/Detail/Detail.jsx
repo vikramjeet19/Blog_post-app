@@ -16,7 +16,6 @@ class Detail extends React.Component {
         }
     }
     render() {
-        console.log(this.props);
         return (<Container style={{ width: '70%' }}>
             <Row>
                 <Col >
@@ -26,7 +25,7 @@ class Detail extends React.Component {
                     <hr />
                     <p style={{ fontSize: '20px' }}>{this.state.data.content}</p>
 
-                    <Comment id={this.props.location.state.data}/>
+                    <Comment id={this.props.location.state.data} />
                 </Col>
             </Row>
         </Container >);
