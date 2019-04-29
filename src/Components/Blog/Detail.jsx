@@ -1,34 +1,35 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import Comment from '../Comment/Comment'
 class Detail extends React.Component {
     state = {
-        data: ''
+        data: '',
     }
     componentDidMount() {
-        let data=JSON.parse(localStorage.getItem('UserData'))
-        if (data != null){
+        let data = JSON.parse(localStorage.getItem('UserData'))
+        if (data != null) {
             let userData = data[this.props.location.state.data]
-            this.setState({data:userData})
+            this.setState({ data: userData })
         }
-        else{
+        else {
             console.log('not found')
-        }    
+        }
     }
     render() {
-        console.log(this.state)
-        return (<Container>
+        console.log(this.props);
+        return (<Container style={{ width: '70%' }}>
             <Row>
-            <h1>
-             {this.state.data.title}
-            </h1>
+                <Col >
+                    <h1>
+                        {this.state.data.title}
+                    </h1>
+                    <hr />
+                    <p style={{ fontSize: '20px' }}>{this.state.data.content}</p>
+
+                    <Comment id={this.props.location.state.data}/>
+                </Col>
             </Row>
-            <Row></Row>
-            <Row style={{marginTop:'20px'}}>
-            <p style={{fontSize:'20px'}}>{this.state.data.content}</p>
-            </Row>
-        </Container>);
+        </Container >);
     }
-
-
 }
 export default Detail;

@@ -7,8 +7,6 @@ class Edit extends React.Component {
         title: this.props.location.state.detail.title,
         content: this.props.location.state.detail.content,
     }
-
-
     submitHandler = (e) => {
         e.preventDefault();
         let data = [];
