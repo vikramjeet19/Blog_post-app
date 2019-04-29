@@ -11,8 +11,8 @@ class Blog extends React.Component {
         blogPage: false,
         userId: '',
         storedData: [],
-       
     }
+
     componentDidMount() {
         Auth.currentSession()
             .then(data => {
@@ -46,15 +46,13 @@ class Blog extends React.Component {
     editHandler = (key) => {
         console.log(key);
         this.props.history.push({
-            pathname: '/post',
-            state: { detail: this.state.storedData }
+            pathname: '/edit',
+            state: { detail: this.state.storedData[key] , key:key}
         });
     }
 
     render() {
-        // if(this.state.editComponent){
-        //     return(<Post  />);
-        // }
+    
         return (<div style={{ marginTop: '30px', marginLeft: '80px' }}>
             <Row >
                 <Col md="auto">
