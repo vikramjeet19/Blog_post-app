@@ -3,13 +3,15 @@ import { Auth } from 'aws-amplify';
 import { Card, Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withRouter } from 'react-router-dom';
+// import Post from './Post';
 
 
 class Blog extends React.Component {
     state = {
         blogPage: false,
         userId: '',
-        storedData: []
+        storedData: [],
+       
     }
     componentDidMount() {
         Auth.currentSession()
@@ -20,22 +22,39 @@ class Blog extends React.Component {
         this.setState({ storedData: JSON.parse(localStorage.getItem('UserData')) })
 
     }
-    detailPostHadler=(key)=>{
+    detailPostHadler = (key) => {
         this.props.history.push({
-            pathname:'/detail',
-            state:{data:key},
-            
+            pathname: '/detail',
+            state: { data: key },
         })
     }
-
     clickedHandler = () => {
         this.props.history.push({
             pathname: '/post',
             state: { detail: this.state.userId }
         });
     }
+    deleteHandler = (key) => {
+        console.log(key);
+        let storage = JSON.parse(localStorage.getItem('UserData'));
+        storage.splice(key, 1)
+        console.log(storage);
+        localStorage.setItem('UserData', JSON.stringify(storage));
+        this.setState({storedData:storage})
+       this.props.history.push('/')
+    }
+    editHandler = (key) => {
+        console.log(key);
+        this.props.history.push({
+            pathname: '/post',
+            state: { detail: this.state.storedData }
+        });
+    }
 
     render() {
+        // if(this.state.editComponent){
+        //     return(<Post  />);
+        // }
         return (<div style={{ marginTop: '30px', marginLeft: '80px' }}>
             <Row >
                 <Col md="auto">
@@ -52,7 +71,7 @@ class Blog extends React.Component {
                 </Col>
             </Row>
             <Row style={{ marginTop: '20px' }}>
-                {this.state.storedData ? this.state.storedData.map((mapper,key) => {
+                {this.state.storedData ? this.state.storedData.map((mapper, key) => {
                     return (
                         <Card key={key} bg="dark" text="white" border="warning" style={{ width: '18rem', height: '13rem', marginLeft: '15px', marginTop: '20px' }}>
                             <Card.Header>
@@ -63,21 +82,21 @@ class Blog extends React.Component {
                                     <Col>
                                         <Card.Title className=" text-center">
                                             <FontAwesomeIcon style={{ marginLeft: '10px' }} icon="heart" />
-                                            <FontAwesomeIcon style={{ marginLeft: '10px' }} icon="trash" />
-                                            <FontAwesomeIcon style={{ marginLeft: '10px' }} icon="edit" />
+                                            <FontAwesomeIcon onClick={() => this.deleteHandler(key)} style={{ marginLeft: '10px' }} icon="trash" />
+                                            <FontAwesomeIcon onClick={() => this.editHandler(key)} style={{ marginLeft: '10px' }} icon="edit" />
                                         </Card.Title>
                                     </Col>
                                 </Row>
                             </Card.Header>
-                                <Card.Body  onClick={()=>this.detailPostHadler(key)} >
-                                    <Card.Text>
-                                        {mapper.content}
-                                    </Card.Text>
-                                </Card.Body>
+                            <Card.Body onClick={() => this.detailPostHadler(key)} >
+                                <Card.Text>
+                                    {mapper.content}
+                                </Card.Text>
+                            </Card.Body>
                         </Card>
-                            )
-                }) : null }</Row>
+                    )
+                }) : null}</Row>
         </div>);
-            }
-        }
+    }
+}
 export default withRouter(Blog);

@@ -14,7 +14,6 @@ class Detail extends React.Component {
             console.log('not found')
         }    
     }
-
     render() {
         console.log(this.state)
         return (<Container>

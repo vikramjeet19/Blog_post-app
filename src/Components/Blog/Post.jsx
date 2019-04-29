@@ -6,28 +6,25 @@ class Post extends React.Component {
     state = {
         title: '',
         content: '',
-        userId: this.props.location.state.detail
+        userId: this.props.location ? this.props.location.state.detail : '' 
     }
 
 
     submitHandler = (e) => {
         e.preventDefault();
-        // console.log(this.state);
-
         let data = [];
-        if(JSON.parse(localStorage.getItem('UserData'))!== null){
-            data=[...JSON.parse(localStorage.getItem('UserData'))]
+        if (JSON.parse(localStorage.getItem('UserData')) !== null) {
+            data = [...JSON.parse(localStorage.getItem('UserData'))]
             data.push(this.state);
             localStorage.setItem('UserData', JSON.stringify(data));
             this.props.history.push('/');
         }
-        else{
+        else {
             data.push(this.state);
             localStorage.setItem('UserData', JSON.stringify(data));
             this.props.history.push('/');
+        }
 
-        }
-       
     }
 
     changeHandler = (event) => {
@@ -37,7 +34,6 @@ class Post extends React.Component {
 
     }
     render() {
-        // console.log(this.props.location.state.detail)
         return (
             <Container style={{ marginTop: '50px', width: '80%' }}>
                 <Form>

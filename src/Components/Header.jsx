@@ -1,7 +1,7 @@
 import React from 'react';
-import { Navbar} from 'react-bootstrap';
+import { Navbar,Button} from 'react-bootstrap';
 import { Auth } from 'aws-amplify';
-import {Button} from 'react-bootstrap'
+import {withRouter,Link} from 'react-router-dom';
 
 class Header extends React.Component  {
     signOut = () => {
@@ -9,11 +9,14 @@ class Header extends React.Component  {
         .then(data => console.log(data))
         .catch(err => console.log(err));
       }
+      homeHandler=()=>{
+        this.props.history.push('/')
+      }
     render(){
         return (
             <>
                 <Navbar bg="dark" variant="dark">
-                    <Navbar.Brand>Blog Post </Navbar.Brand>
+                    <Navbar.Brand onClick={this.homeHandler}><Link to='/'>Blog Post</Link> </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                     <Button variant="outline-warning" onClick={this.signOut} >Logout</Button>
@@ -21,7 +24,5 @@ class Header extends React.Component  {
                 </Navbar>
             </>)
     }
-    
-    
 }
-export default Header;
+export default withRouter(Header);
