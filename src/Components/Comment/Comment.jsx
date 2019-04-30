@@ -31,21 +31,24 @@ class Comment extends React.Component {
     submitHandler = (e) => {
         e.preventDefault();
         let data = [];
+       if(this.state.name.length !== 0 && this.state.comment.length !== 0){       
         if (JSON.parse(localStorage.getItem('Comments')) !== null) {
             data = [...JSON.parse(localStorage.getItem('Comments'))];
             data.push(this.state);
             localStorage.setItem('Comments', JSON.stringify(data));
             data = [...JSON.parse(localStorage.getItem('Comments'))];
             let updatedData = data.filter(key => key.id === this.props.id);
-            this.setState({ localComments: updatedData, comment:' ', name:' ' })
-
+            this.setState({ localComments: updatedData, comment: '', name: '' })
         }
-        else {
+        else{
             data.push(this.state);
             localStorage.setItem('Comments', JSON.stringify(data));
             data = [...JSON.parse(localStorage.getItem('Comments'))];
             let updatedData = data.filter(key => key.id === this.props.id);
-            this.setState({ localComments: updatedData, comment:' ', name:' ' })
+            this.setState({ localComments: updatedData, comment: '', name: '' })
+        }}
+        else{
+            alert('enter data');
         }
 
     }
@@ -64,17 +67,16 @@ class Comment extends React.Component {
                         </InputGroup>
 
                         <Form.Group controlId="comment">
-                            <Form.Control onChange={this.changedHandler} p  value={this.state.comment} laceholder='Enter Your comment' as="textarea" rows="3" />
+                            <Form.Control onChange={this.changedHandler} p value={this.state.comment} laceholder='Enter Your comment' as="textarea" rows="3" />
                         </Form.Group>
                         <Button onClick={this.submitHandler} variant="outline-warning">Submit</Button>
                     </Form>
 
                     {
                         this.state.localComments.map(mapper => {
-                            return (<Card bg="light" style={{ width: '100%', marginTop: '20px' }}>
+                            return (<Card bg="dark" text="white" style={{ width: '100%', marginTop: '20px' }}>
                                 <Card.Body>
-                                    <Card.Title style={{ color: 'green' }}>{mapper.name}</Card.Title>
-
+                                    <Card.Title style={{ color: 'orange' }}>{mapper.name}</Card.Title>
                                     <Card.Text>
                                         <p>{mapper.comment}</p>
                                     </Card.Text>

@@ -5,10 +5,13 @@ import {withRouter,Link} from 'react-router-dom';
 
 class Header extends React.Component  {
     signOut = () => {
+        localStorage.clear();
         Auth.signOut()
         .then(data => console.log(data))
         .catch(err => console.log(err));
+
       }
+
       homeHandler=()=>{
         this.props.history.push('/')
       }
@@ -19,6 +22,7 @@ class Header extends React.Component  {
                     <Navbar.Brand onClick={this.homeHandler}><Link to='/'>Blog Post</Link> </Navbar.Brand>
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
+                    <Link style={{marginRight:'30px'}} to='/userDetail'>User</Link>
                     <Button variant="outline-warning" onClick={this.signOut} >Logout</Button>
                     </Navbar.Collapse>
                 </Navbar>

@@ -13,6 +13,7 @@ class Post extends React.Component {
     submitHandler = (e) => {
         e.preventDefault();
         let data = [];
+        if(this.state.title.length !== 0 && this.state.content.length !== 0){
         if (JSON.parse(localStorage.getItem('UserData')) !== null) {
             data = [...JSON.parse(localStorage.getItem('UserData'))]
             data.push(this.state);
@@ -25,7 +26,11 @@ class Post extends React.Component {
             this.props.history.push('/');
         }
 
+    }else{
+        alert('enter data')
     }
+}
+    
 
     changeHandler = (event) => {
         this.setState({

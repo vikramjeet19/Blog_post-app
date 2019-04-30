@@ -79,7 +79,7 @@ class Blog extends React.Component {
                                     </Col>
                                     <Col>
                                         <Card.Title className=" text-center">
-                                            <FontAwesomeIcon style={{ marginLeft: '10px' }} icon="heart" />
+                                            {/* <FontAwesomeIcon style={{ marginLeft: '10px' }} icon="heart" /> */}
                                             <FontAwesomeIcon onClick={() => this.deleteHandler(key)} style={{ marginLeft: '10px' }} icon="trash" />
                                             <FontAwesomeIcon onClick={() => this.editHandler(key)} style={{ marginLeft: '10px' }} icon="edit" />
                                         </Card.Title>
