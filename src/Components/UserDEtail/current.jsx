@@ -8,10 +8,21 @@ class Current extends React.Component {
         logout:''
     }
 
+  pass = ()=>{
+      Auth.currentAuthenticatedUser()
+    .then(user => {
+        return Auth.changePassword(user, 'oldPassword', 'newPassword');
+    })
+    .then(data => console.log(data))
+    .catch(err => console.log(err));
+
+}
+
     componentDidMount() {
         Auth.currentAuthenticatedUser({
         }).then(user => this.setState({ logout: user.attributes }))
             .catch(err => console.log(err));
+
 
     }
 
@@ -32,6 +43,7 @@ class Current extends React.Component {
                             </Col>
                             
                         </Row>
+                        
                     </Card.Text>
                 </Card.Body>
             </Card>

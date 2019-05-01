@@ -20,10 +20,7 @@ class Blog extends React.Component {
                 this.setState({ userId: data.idToken.payload.email ,userNumber:data.idToken.payload.phone_number})
             })
             .catch(err => console.log(err));
-        this.setState({ storedData: JSON.parse(localStorage.getItem('UserData')) })
-        //  axios.get('https://blogpostappdata-3ee9c.firebaseio.com/data.json')
-        //    .then(resolved=>console.log(resolved.data))
-          
+        this.setState({ storedData: JSON.parse(localStorage.getItem('UserData')) })        
 
     }
     detailPostHadler = (key) => {
