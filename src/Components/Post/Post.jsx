@@ -6,7 +6,8 @@ class Post extends React.Component {
     state = {
         title: '',
         content: '',
-        userId: this.props.location ? this.props.location.state.detail : '' ,
+        userId: this.props.location ? this.props.location.state.userEmail : '' ,
+        userNumber: this.props.location ? this.props.location.state.userNumber : '' 
     }
 
 
@@ -31,8 +32,7 @@ class Post extends React.Component {
     }
 }
     
-
-    changeHandler = (event) => {
+changeHandler = (event) => {
         this.setState({
             [event.target.id]: event.target.value
         })

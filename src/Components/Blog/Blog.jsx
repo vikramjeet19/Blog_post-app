@@ -3,23 +3,27 @@ import { Auth } from 'aws-amplify';
 import { Card, Col, Row } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { withRouter } from 'react-router-dom';
-// import Post from './Post';
-
+// import axios from 'axios';
 
 class Blog extends React.Component {
     state = {
         blogPage: false,
         userId: '',
+        userNumber:'',
         storedData: [],
+        userDetails: false
     }
 
     componentDidMount() {
         Auth.currentSession()
             .then(data => {
-                this.setState({ userId: data.idToken.payload.email })
+                this.setState({ userId: data.idToken.payload.email ,userNumber:data.idToken.payload.phone_number})
             })
             .catch(err => console.log(err));
         this.setState({ storedData: JSON.parse(localStorage.getItem('UserData')) })
+        //  axios.get('https://blogpostappdata-3ee9c.firebaseio.com/data.json')
+        //    .then(resolved=>console.log(resolved.data))
+          
 
     }
     detailPostHadler = (key) => {
@@ -31,28 +35,32 @@ class Blog extends React.Component {
     clickedHandler = () => {
         this.props.history.push({
             pathname: '/post',
-            state: { detail: this.state.userId }
+            state: { userEmail: this.state.userId , userNumber: this.state.userNumber }
         });
     }
     deleteHandler = (key) => {
-        console.log(key);
         let storage = JSON.parse(localStorage.getItem('UserData'));
         storage.splice(key, 1)
-        console.log(storage);
         localStorage.setItem('UserData', JSON.stringify(storage));
-        this.setState({storedData:storage})
-       this.props.history.push('/')
+        this.setState({ storedData: storage })
     }
     editHandler = (key) => {
-        console.log(key);
         this.props.history.push({
             pathname: '/edit',
-            state: { detail: this.state.storedData[key] , key:key}
+            state: { detail: this.state.storedData[key], key: key }
         });
+    }
+    userView = (key) => {
+        console.log(key);
+        let storage = JSON.parse(localStorage.getItem('UserData'));
+        let a=storage[key]
+        this.props.history.push({
+            pathname: '/userDetail',
+           state:{data:a}
+        })
     }
 
     render() {
-    
         return (<div style={{ marginTop: '30px', marginLeft: '80px' }}>
             <Row >
                 <Col md="auto">
@@ -71,7 +79,7 @@ class Blog extends React.Component {
             <Row style={{ marginTop: '20px' }}>
                 {this.state.storedData ? this.state.storedData.map((mapper, key) => {
                     return (
-                        <Card key={key} bg="dark" text="white" border="warning" style={{ width: '18rem', height: '13rem', marginLeft: '15px', marginTop: '20px' }}>
+                        <Card key={key} bg="dark" text="white" border="warning" style={{ width: '18rem', height: '14rem', marginLeft: '15px', marginTop: '20px' }}>
                             <Card.Header>
                                 <Row>
                                     <Col>
@@ -79,7 +87,7 @@ class Blog extends React.Component {
                                     </Col>
                                     <Col>
                                         <Card.Title className=" text-center">
-                                            {/* <FontAwesomeIcon style={{ marginLeft: '10px' }} icon="heart" /> */}
+                                            <FontAwesomeIcon onClick={()=>this.userView(key)} style={{ marginLeft: '10px' }} icon="user-tie" />
                                             <FontAwesomeIcon onClick={() => this.deleteHandler(key)} style={{ marginLeft: '10px' }} icon="trash" />
                                             <FontAwesomeIcon onClick={() => this.editHandler(key)} style={{ marginLeft: '10px' }} icon="edit" />
                                         </Card.Title>

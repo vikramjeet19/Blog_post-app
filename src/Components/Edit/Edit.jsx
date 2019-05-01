@@ -16,7 +16,6 @@ class Edit extends React.Component {
             localStorage.setItem('UserData', JSON.stringify(data));
             this.props.history.push('/');
         }
-
     changeHandler = (event) => {
         this.setState({
             [event.target.id]: event.target.value

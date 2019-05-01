@@ -8,10 +8,11 @@ import Post from './Components/Post/Post';
 import Detail from './Components/Detail/Detail';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import Edit from './Components/Edit/Edit';
-import User from './Components/UserDetails';
+import User from './Components/UserDEtail/UserDetails';
 
-import { faPlusCircle,faHeart,faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
-library.add(faPlusCircle,faTrash,faHeart,faEdit)
+import { faPlusCircle,faUserTie,faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
+import Current from './Components/UserDEtail/current';
+library.add(faPlusCircle,faTrash,faUserTie,faEdit)
 
 
 class App extends React.Component {
@@ -19,13 +20,13 @@ class App extends React.Component {
   render() {
     return (
       <div className='body'>
-      
         <Header />
         <Switch>
         <Route exact path='/post' component={Post} />
         <Route path='/detail' component={Detail}/>
         <Route path='/edit' component={Edit}/>
         <Route path='/userDetail' component={User}/> 
+        <Route path= '/user' component={Current}/>
         <Route path='/' component={Blog} />   
         </Switch>
        

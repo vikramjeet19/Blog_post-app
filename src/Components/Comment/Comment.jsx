@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Card, Button, FormControl, InputGroup } from 'react-bootstrap';
-
+// import axios from 'axios';
 class Comment extends React.Component {
     state = {
 
@@ -39,6 +39,8 @@ class Comment extends React.Component {
             data = [...JSON.parse(localStorage.getItem('Comments'))];
             let updatedData = data.filter(key => key.id === this.props.id);
             this.setState({ localComments: updatedData, comment: '', name: '' })
+            // axios.post('https://blogpostappdata-3ee9c.firebaseio.com/comments.json ',data);
+            // console.log(axios.get('https://blogpostappdata-3ee9c.firebaseio.com/comments.json'))
         }
         else{
             data.push(this.state);
@@ -46,12 +48,14 @@ class Comment extends React.Component {
             data = [...JSON.parse(localStorage.getItem('Comments'))];
             let updatedData = data.filter(key => key.id === this.props.id);
             this.setState({ localComments: updatedData, comment: '', name: '' })
+            // axios.post('https://blogpostappdata-3ee9c.firebaseio.com/comments.json ',data);
         }}
         else{
             alert('enter data');
         }
 
     }
+   
     render() {
 
         return (<>
@@ -87,6 +91,7 @@ class Comment extends React.Component {
 
                 </Card.Body>
             </Card>
+         
         </>)
     }
 }
